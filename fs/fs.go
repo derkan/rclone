@@ -262,6 +262,11 @@ type Info interface {
 
 	// Features returns the optional features of this Fs
 	Features() *Features
+
+	// GetOptions gets current Options structure
+	GetOptions() interface{}
+	// SetOptions updates current Options structure
+	SetOptions(opts interface{}) error
 }
 
 // Object is a filesystem like object provided by an Fs

@@ -426,6 +426,20 @@ func (f *Fs) String() string {
 func (f *Fs) Features() *fs.Features {
 	return f.features
 }
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt= opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
+}
 
 // Precision is the remote sftp file system's modtime precision, which we have no way of knowing. We estimate at 1s
 func (f *Fs) Precision() time.Duration {

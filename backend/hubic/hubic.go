@@ -190,6 +190,10 @@ func NewFs(name, root string, m configmap.Mapper) (fs.Fs, error) {
 func (f *Fs) Features() *fs.Features {
 	return f.features
 }
+// Options gets current Options structure
+func (f *Fs) Options() interface{} {
+	return nil
+}
 
 // UnWrap returns the Fs that this Fs is wrapping
 func (f *Fs) UnWrap() fs.Fs {

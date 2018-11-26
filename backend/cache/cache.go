@@ -107,7 +107,7 @@ will need to be cleared or unexpected EOF errors will occur.`,
 			}},
 		}, {
 			Name: "info_age",
-			Help: `How long to cache file structure information (directory listings, file size, times etc). 
+			Help: `How long to cache file structure information (directory listings, file size, times etc).
 If all write operations are done through the cache then you can safely make
 this value very large as the cache store will also be updated in real time.`,
 			Default: DefCacheInfoAge,
@@ -550,7 +550,7 @@ Params:
 Eg
 
     rclone rc cache/expire remote=path/to/sub/folder/
-    rclone rc cache/expire remote=/ withData=true 
+    rclone rc cache/expire remote=/ withData=true
 `,
 	})
 
@@ -903,6 +903,22 @@ func (f *Fs) Features() *fs.Features {
 func (f *Fs) String() string {
 	return fmt.Sprintf("Cache remote %s:%s", f.name, f.root)
 }
+
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt= opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
+}
+
 
 // ChunkSize returns the configured chunk size
 func (f *Fs) ChunkSize() int64 {

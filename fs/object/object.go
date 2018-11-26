@@ -83,6 +83,12 @@ func (memoryFs) Hashes() hash.Set { return hash.Supported }
 // Features returns the optional features of this Fs
 func (memoryFs) Features() *fs.Features { return &fs.Features{} }
 
+// GetOptions gets current Options structure
+func (memoryFs) GetOptions() interface{} { return nil }
+
+// SetOptions gets current Options structure
+func (memoryFs) SetOptions(interface{}) error { return nil }
+
 // List the objects and directories in dir into entries.  The
 // entries can be returned in any order but should be for a
 // complete directory.

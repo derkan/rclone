@@ -324,6 +324,20 @@ func (f *Fs) Hashes() hash.Set {
 func (f *Fs) Features() *fs.Features {
 	return f.features
 }
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt= opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
+}
 
 // Put created a new object
 func (f *Fs) Put(in io.Reader, src fs.ObjectInfo, options ...fs.OpenOption) (fs.Object, error) {

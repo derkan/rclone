@@ -193,6 +193,20 @@ func (f *Fs) String() string {
 func (f *Fs) Features() *fs.Features {
 	return f.features
 }
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt= opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
+}
 
 // caseInsenstive returns whether the remote is case insensitive or not
 func (f *Fs) caseInsensitive() bool {

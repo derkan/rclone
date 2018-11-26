@@ -185,6 +185,22 @@ func (f *Fs) Features() *fs.Features {
 	return f.features
 }
 
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt= opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
+}
+
+
 // Pattern to match a azure path
 var matcher = regexp.MustCompile(`^/*([^/]*)(.*)$`)
 

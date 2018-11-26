@@ -5,6 +5,7 @@
 package http
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -178,6 +179,22 @@ func (f *Fs) String() string {
 // Features returns the optional features of this Fs
 func (f *Fs) Features() *fs.Features {
 	return f.features
+}
+
+// GetOptions gets current Options structure
+func (f *Fs) GetOptions() interface{} {
+	return f.opt
+}
+
+// SetOptions updates current Options structure
+func (f *Fs) SetOptions(opts interface{}) error {
+	switch opts.(type) {
+	case *Options:
+		f.opt = opts.(Options)
+	default:
+		return fmt.Errorf("invalid structure")
+	}
+	return nil
 }
 
 // Precision is the remote http file system's modtime precision, which we have no way of knowing. We estimate at 1s
